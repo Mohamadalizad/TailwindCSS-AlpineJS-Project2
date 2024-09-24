@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TailwindCSS</title>
+  <link rel="stylesheet" href="./../../dist/css/tailwind.css">
+</head>
+<body class="flex flex-col h-full justify-center items-center bg-gradient-to-r from-red-600 to-indigo-600">
+  <main class="rounded-2xl bg-white bg-opacity-30 border border-gray-300 p-4 w-full max-w-2xl" x-data="{ openTab : 1 }">
+    <ul class="flex flex-row items-center list-none text-lg mb-8 font-bold text-gray-900">
+      <li class="px-4 py-2 cursor-pointer" x-on:click="openTab = 1"
+        x-bind:class="{ 'border-b-2 border-blue-600' : openTab === 1 }">Login</li>
+      <li class="px-4 py-2 cursor-pointer" x-on:click="openTab = 2"
+        x-bind:class="{ 'border-b-2 border-blue-600' : openTab === 2 }">Register</li>
+    </ul>
+    <!-- form login -->
+    <div x-data="{openFacebook: false}" x-show="openTab == 1">
+      <div class="flex flex-col items-center gap-4 mb-8" x-data="{opengmail: false}">
+        <h3 class="text-xl font-bold"> Log In With:</h3>
+        <div class="flex gap-4 items-center" x-data="{openTwitter: false}" >
+          <!-- Twitter -->
+          <div x-on:click="openTwitter = true"
+            class=" text-white bg-blue-400 rounded-full w-16 h-16 flex justify-center items-center hover:bg-blue-100 transition cursor-pointer hover:text-blue-500 ">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 30 30" class="fill-current w-8 h-8">
+              <path
+                d="M28,6.937c-0.957,0.425-1.985,0.711-3.064,0.84c1.102-0.66,1.947-1.705,2.345-2.951c-1.03,0.611-2.172,1.055-3.388,1.295 c-0.973-1.037-2.359-1.685-3.893-1.685c-2.946,0-5.334,2.389-5.334,5.334c0,0.418,0.048,0.826,0.138,1.215 c-4.433-0.222-8.363-2.346-10.995-5.574C3.351,6.199,3.088,7.115,3.088,8.094c0,1.85,0.941,3.483,2.372,4.439 c-0.874-0.028-1.697-0.268-2.416-0.667c0,0.023,0,0.044,0,0.067c0,2.585,1.838,4.741,4.279,5.23 c-0.447,0.122-0.919,0.187-1.406,0.187c-0.343,0-0.678-0.034-1.003-0.095c0.679,2.119,2.649,3.662,4.983,3.705 c-1.825,1.431-4.125,2.284-6.625,2.284c-0.43,0-0.855-0.025-1.273-0.075c2.361,1.513,5.164,2.396,8.177,2.396 c9.812,0,15.176-8.128,15.176-15.177c0-0.231-0.005-0.461-0.015-0.69C26.38,8.945,27.285,8.006,28,6.937z"
+                fill="current"></path>
+            </svg>
+          </div>
+          <!-- Facebook -->
+          <div x-on:click="openFacebook = true"
+            class="text-white bg-blue-700 rounded-full flex items-center justify-center w-16 h-16  hover:bg-blue-100 transition cursor-pointer hover:text-blue-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-10 h-10" viewBox="0 0 30 30">
+              <path
+                d="M15,3C8.373,3,3,8.373,3,15c0,6.016,4.432,10.984,10.206,11.852V18.18h-2.969v-3.154h2.969v-2.099c0-3.475,1.693-5,4.581-5 c1.383,0,2.115,0.103,2.461,0.149v2.753h-1.97c-1.226,0-1.654,1.163-1.654,2.473v1.724h3.593L19.73,18.18h-3.106v8.697 C22.481,26.083,27,21.075,27,15C27,8.373,21.627,3,15,3z"
+                fill="current"></path>
+            </svg>
+          </div>
+          <!-- Gmail -->
+          <div x-on:click="opengmail = true" class="text-white bg-red-600 rounded-full flex items-center justify-center w-16 h-16  hover:bg-red-100 transition cursor-pointer hover:text-red-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+              <path
+                d="M18,21h2c1.65,0,3-1.35,3-3V9.92l-6,4.68V20C17,20.552,17.448,21,18,21z M19.5,3c-0.79,0-1.54,0.26-2.16,0.74L17,4.01v8.06	l6-4.69V6.5C23,4.57,21.43,3,19.5,3z M9,5.57v8.06l2.385,1.86c0.362,0.282,0.869,0.282,1.23,0L15,13.63V5.57l-3,2.34L9,5.57z M1,18	c0,1.65,1.35,3,3,3h2c0.552,0,1-0.448,1-1v-5.4L1,9.92V18z M4.5,3C2.57,3,1,4.57,1,6.5v0.88l6,4.69V4.01L6.66,3.74	C6.04,3.26,5.29,3,4.5,3z"
+                fill="current"></path>
+            </svg>
+          </div>
+          <!-- Twitter model -->
+          <div class="fixed inset-0 bg-gray-900 bg-opacity-40 z-10 flex justify-center items-center"
+            x-show="openTwitter" x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0" x-cloak>
+            <!-- modal -->
+            <div
+              class="w-full max-w-xs sm:max-w-md rounded-2xl flex flex-row sm:flex-col h-40 sm:h-auto overflow-hidden">
+              <!-- logo -->
+              <div
+                class="w-1/3 bg-blue-400 h-full sm:h-28 sm:w-full text-white flex justify-center items-center relative">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 30 30"
+                  class="fill-current w-8 h-8 lg:hover:animate-bounce ">
+                  <path
+                    d="M28,6.937c-0.957,0.425-1.985,0.711-3.064,0.84c1.102-0.66,1.947-1.705,2.345-2.951c-1.03,0.611-2.172,1.055-3.388,1.295 c-0.973-1.037-2.359-1.685-3.893-1.685c-2.946,0-5.334,2.389-5.334,5.334c0,0.418,0.048,0.826,0.138,1.215 c-4.433-0.222-8.363-2.346-10.995-5.574C3.351,6.199,3.088,7.115,3.088,8.094c0,1.85,0.941,3.483,2.372,4.439 c-0.874-0.028-1.697-0.268-2.416-0.667c0,0.023,0,0.044,0,0.067c0,2.585,1.838,4.741,4.279,5.23 c-0.447,0.122-0.919,0.187-1.406,0.187c-0.343,0-0.678-0.034-1.003-0.095c0.679,2.119,2.649,3.662,4.983,3.705 c-1.825,1.431-4.125,2.284-6.625,2.284c-0.43,0-0.855-0.025-1.273-0.075c2.361,1.513,5.164,2.396,8.177,2.396 c9.812,0,15.176-8.128,15.176-15.177c0-0.231-0.005-0.461-0.015-0.69C26.38,8.945,27.285,8.006,28,6.937z"
+                    fill="current"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-6 h-6 absolute top-2 left-2 cursor-pointer"
+                  x-on:click="openTwitter= false">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <!-- inputs -->
+              <div class="flex flex-col gap-4 p-4 h-full w-2/3 sm:h-40 sm:w-full bg-white">
+                <!-- Email -->
+                <div class="flex flex-col gap-2">
+                  <label for="email" class="font-medium text-sm text-gray-800">Email
+                    <div class="relative w-full">
+                      <input type="email" id="email" placeholder="Enter Your Email"
+                        class="custom-input border border-gray-500 ">
+                      <!-- svg -->
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class=" w-6 h-6 absolute top-2 left-3 text-indigo-400">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                          fill="fill-current" />
+                      </svg>
+                      <!-- button -->
+                      <button class="modal-btn ring-indigo-300 bg-blue-400 border-2 border-indigo-400 mt-3 "> Log In
+                      </button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- facebook model -->
+          <div x-show="openFacebook"
+            class="fixed inset-0 bg-gray-900 bg-opacity-40 z-10 flex justify-center items-center"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-500"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak>
+            <!-- modal -->
+            <div
+              class=" w-full bg-white h-40  overflow-hidden max-w-xs sm:max-w-md sm:h-auto flex-row sm:flex-col rounded-2xl flex ">
+              <!-- logo facebook -->
+              <div
+                class="w-1/3 sm:w-full bg-blue-700 flex sm:h-28 justify-center items-center overflow-hidden text-white relative">
+                <svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-8 h-8" viewBox="0 0 30 30">
+                  <path
+                    d="M15,3C8.373,3,3,8.373,3,15c0,6.016,4.432,10.984,10.206,11.852V18.18h-2.969v-3.154h2.969v-2.099c0-3.475,1.693-5,4.581-5 c1.383,0,2.115,0.103,2.461,0.149v2.753h-1.97c-1.226,0-1.654,1.163-1.654,2.473v1.724h3.593L19.73,18.18h-3.106v8.697 C22.481,26.083,27,21.075,27,15C27,8.373,21.627,3,15,3z"
+                    fill="current"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-6 h-6 absolute top-2 left-2 cursor-pointer"
+                  x-on:click="openFacebook= false">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <!-- inputs -->
+              <div class="flex flex-col p-4 gap-4 w-2/3 sm:w-full">
+                <label class="font-medium text-sm text-gray-800" for="email">Email</label>
+                <div class="relative w-full">
+                  <input type="email" placeholder="Enter your Email" id="email"
+                    class="custom-input border border-gray-300">
+                  <!-- svg -->
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class=" w-6 h-6 absolute top-2 left-3 text-indigo-400">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                      fill="fill-current" />
+                  </svg>
+                </div>
+                <button class="modal-btn bg-blue-700 ring-indigo-500 ring-8">Log In</button>
+              </div>
+            </div>
+          </div>
+          <!-- gmail model -->
+          <div x-show="opengmail"
+            class="fixed inset-0 bg-gray-900 bg-opacity-40 z-10 flex justify-center items-center"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-500"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak>
+            <!-- modal -->
+            <div
+              class=" w-full bg-white h-40  overflow-hidden max-w-xs sm:max-w-md sm:h-auto flex-row sm:flex-col rounded-2xl flex ">
+              <!-- logo gmail -->
+              <div
+                class="w-1/3 sm:w-full bg-red-600 flex sm:h-28 justify-center items-center overflow-hidden text-white relative">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                  <path
+                    d="M18,21h2c1.65,0,3-1.35,3-3V9.92l-6,4.68V20C17,20.552,17.448,21,18,21z M19.5,3c-0.79,0-1.54,0.26-2.16,0.74L17,4.01v8.06	l6-4.69V6.5C23,4.57,21.43,3,19.5,3z M9,5.57v8.06l2.385,1.86c0.362,0.282,0.869,0.282,1.23,0L15,13.63V5.57l-3,2.34L9,5.57z M1,18	c0,1.65,1.35,3,3,3h2c0.552,0,1-0.448,1-1v-5.4L1,9.92V18z M4.5,3C2.57,3,1,4.57,1,6.5v0.88l6,4.69V4.01L6.66,3.74	C6.04,3.26,5.29,3,4.5,3z"
+                    fill="current"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-6 h-6 absolute top-2 left-2 cursor-pointer"
+                  x-on:click="opengmail= false">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <!-- inputs -->
+              <div class="flex flex-col p-4 gap-4 w-2/3 sm:w-full">
+                <label class="font-medium text-sm text-gray-800" for="email">Email</label>
+                <div class="relative w-full">
+                  <input type="email" placeholder="Enter your Email" id="email"
+                    class="custom-input border border-gray-300">
+                  <!-- svg -->
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class=" w-6 h-6 absolute top-2 left-3 text-red-500">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                      fill="fill-current" />
+                  </svg>
+                </div>
+                <button class="modal-btn bg-red-500 ring-pink-400 ring-8">Log In</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="flex flex-col gap-4">
+        <!-- username -->
+        <div class="flex flex-col gap-2">
+          <label for="username" class="custom-lable">UserName
+            <div class="relative w-full">
+              <input type="text" id="username" class="custom-input">
+              <!-- svg -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6 absolute top-2 left-3 text-indigo-700">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+              </svg>
+            </div>
+        </div>
+        <!-- password -->
+        <div class="flex flex-col gap-2">
+          <label for="password" class="custom-lable">Password
+            <div class="relative w-full">
+              <input type="password" id="password" class="custom-input">
+              <!-- svg -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6 absolute top-2 left-3 text-indigo-700">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+              </svg>
+            </div>
+        </div>
+        <button x-on:click.prevent class="btn ring-indigo-400 bg-blue-800 border-2 border-indigo-400"> Log In </button>
+      </form>
+    </div>
+    <!-- form register -->
+    <div x-show="openTab === 2">
+      <form class="flex flex-col gap-4">
+        <!-- username -->
+        <div class="flex flex-col gap-2">
+          <label for="username" class="custom-lable">UserName
+            <div class="relative w-full">
+              <input type="text" id="username" class="custom-input">
+              <!-- svg -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6 absolute top-2 left-3 text-indigo-700">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+              </svg>
+            </div>
+        </div>
+        <!-- password -->
+        <div class="flex flex-col gap-2">
+          <label for="password" class="custom-lable">Password
+            <div class="relative w-full">
+              <input type="password" id="password" class="custom-input">
+              <!-- svg -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6 absolute top-2 left-3 text-indigo-700">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+              </svg>
+            </div>
+        </div>
+        <!-- email -->
+        <div class="flex flex-col gap-2">
+          <label for="email" class="custom-lable">Email
+            <div class="relative w-full">
+              <input type="email" id="email" class="custom-input">
+              <!-- svg -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class=" w-6 h-6 absolute top-2 left-3 text-indigo-700">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                  fill="fill-current" />
+              </svg>
+            </div>
+            <button x-on:click.prevent class="btn ring-indigo-400 bg-blue-800 border-2 border-indigo-400"> Sign Up
+            </button>
+      </form>
+    </div>
+  </main>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</body>
+</html>
